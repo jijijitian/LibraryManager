@@ -15,9 +15,9 @@ void StudentUser::storeStudentUser(StudentAccount& account)
     }
 
     // 写入用户信息到CSV文件
-    file << m_name << "," << m_userName << "," << m_password << '\n';
+    file << m_userName << "," << m_password << "," << m_name << '\n';
 
-    account.addAccount(m_userName, m_password);
+    account.addAccount(*this);
     // 关闭文件
     file.close();
 }

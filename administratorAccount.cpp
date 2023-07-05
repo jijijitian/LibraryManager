@@ -1,4 +1,4 @@
-#include"administratorAccount.h"
+#include "administratorAccount.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -10,7 +10,7 @@ AdministratorAccount::AdministratorAccount()
     // 检查文件是否成功打开
     if (!file.is_open())
     {
-        std::cout << "管理员目录出错，请立即修复" << std::endl;
+        std::cout << "用户目录出错，请联系管理员" << std::endl;
         return;
     }
 
@@ -20,39 +20,41 @@ AdministratorAccount::AdministratorAccount()
     {
         // 将每一行按照逗号分割
         std::stringstream ss(line);
-        std::string name, userName, password;
-        getline(ss, name, ',');
+        std::string userName;
+        std::vector<std::string> password_name;
         getline(ss, userName, ',');
-        getline(ss, password, '\n');
-        administratorAccount.insert(std::make_pair(userName, password));
+        getline(ss, password_name[0], ',');
+        getline(ss, password_name[1], '\n');
+        administratorAccount.insert(std::make_pair(userName, password_name));
     }
 
     // 关闭文件
     file.close();
 }
 
-void AdministratorAccount::addAccount(std::string userName, std::string password)
+void AdministratorAccount::addAccount(AdministratorUser &administratorUser)
 {
-    administratorAccount.insert(std::make_pair(userName, password));
+    std::vector<std::string> password_name = {administratorUser.getPassword(), administratorUser.getName()};
+    administratorAccount.insert(std::make_pair(administratorUser.getUserName(), password_name));
 }
 
-bool AdministratorAccount::findAccount(std::string userName, std::string password)
+AdministratorUser AdministratorAccount::findAccount(std::string userName, std::string password)
 {
     // 检查用户名和密码是否正确
     if (administratorAccount.find(userName) != administratorAccount.end())
     {
-        if (administratorAccount[userName] == password)
+        if (administratorAccount[userName][0] == password)
         {
-            return true;
+            return AdministratorUser(administratorAccount[userName][1], userName, password);
         }
         else
         {
-            return false;
+            return AdministratorUser("NULL", "NULL", "NULL");
         }
     }
     else
     {
-        return false;
+        return AdministratorUser("NULL", "NULL", "NULL");
     }
 }
 

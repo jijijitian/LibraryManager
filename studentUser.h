@@ -5,9 +5,9 @@
 class StudentUser:public User
 {
     public:
-        void reading();  //正在阅读
+        StudentUser(std::string name, std::string userName, std::string password):User(name, userName, password){}
+        void reading();     // 正在阅读
         void borrowBook();  //借书
         void returnBook();  //还书
         void storeStudentUser(StudentAccount& account);  //储存到本地文件
-        static int serialNumber; // 学生用户序号
 };

@@ -6,9 +6,10 @@
 #include"studentLogin.h"
 #include"registerMenu.h"
 #include"register.h"
-#include"mainWindow.h"
+#include"studentMainWindow.h"
 #include"administratorAccount.h"
 #include"administratorLogin.h"
+#include"administratorMainWindow.h"
 #include<unistd.h>
 
 struct Library

@@ -20,39 +20,41 @@ StudentAccount::StudentAccount()
     {
         // 将每一行按照逗号分割
         std::stringstream ss(line);
-        std::string name, userName, password;
-        getline(ss, name, ',');
+        std::string userName;
+        std::vector<std::string> password_name;
         getline(ss, userName, ',');
-        getline(ss, password, '\n');
-        studentAccount.insert(std::make_pair(userName, password));
+        getline(ss, password_name[0], ',');
+        getline(ss, password_name[1], '\n');
+        studentAccount.insert(std::make_pair(userName, password_name));
     }
 
     // 关闭文件
     file.close();
 }
 
-void StudentAccount::addAccount(std::string userName, std::string password)
+void StudentAccount::addAccount(StudentUser &studentUser)
 {
-    studentAccount.insert(std::make_pair(userName, password));
+    std::vector<std::string> password_name = {studentUser.getPassword(), studentUser.getName()};
+    studentAccount.insert(std::make_pair(studentUser.getUserName(), password_name));
 }
 
-bool StudentAccount::findAccount(std::string userName, std::string password)
+StudentUser StudentAccount::findAccount(std::string userName, std::string password)
 {
     // 检查用户名和密码是否正确
     if (studentAccount.find(userName) != studentAccount.end())
     {
-        if (studentAccount[userName] == password)
+        if (studentAccount[userName][0] == password)
         {
-            return true;
+            return StudentUser(studentAccount[userName][1], userName, password);
         }
         else
         {
-            return false;
+            return StudentUser("NULL", "NULL", "NULL");
         }
     }
     else
     {
-        return false;
+        return StudentUser("NULL", "NULL", "NULL");
     }
 }
 

@@ -48,7 +48,6 @@ int Register::studentRegister(StudentAccount& account)  //学生注册实现
             {
                 system("clear");
                 std::cout << "用户名已存在，请重新输入！" << std::endl;
-                choice = -404;
                 sleep(1);
                 break;
             }
@@ -64,7 +63,7 @@ int Register::studentRegister(StudentAccount& account)  //学生注册实现
         {
             break;
         }
-        else if(choice != -404)
+        else
         {
             //如果用户输入的不是1或2，则提示用户输入错误
             std::cout << "输入错误，请重新输入！" << std::endl;

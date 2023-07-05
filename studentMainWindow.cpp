@@ -1,8 +1,8 @@
-#include"mainWindow.h"
+#include"studentMainWindow.h"
 #include"studentUser.h"
 #include<iostream>
 
-void MainWindow::printMenu()
+void StudentMainWindow::printMenu()
 {
     std::cout << "欢迎登陆学生借阅系统！" << std::endl;
     std::cout << "1.借书" << std::endl;

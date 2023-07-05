@@ -1,7 +1,7 @@
 #include "administratorLogin.h"
 #include <iostream>
 
-bool AdministratorLogin::login(AdministratorAccount &administratorAccount)
+AdministratorUser AdministratorLogin::login(AdministratorAccount &administratorAccount)
 {
     system("clear");
     std::string userName, password;
@@ -9,12 +9,13 @@ bool AdministratorLogin::login(AdministratorAccount &administratorAccount)
     std::cin >> userName;
     std::cout << "请输入密码:";
     std::cin >> password;
-    if (administratorAccount.findAccount(userName, password))
+    AdministratorUser administratorUser = administratorAccount.findAccount(userName, password);
+    if (administratorUser.getName() != "NULL")
     {
-        return true;
+        return administratorUser;
     }
     else
     {
-        return false;
+        return AdministratorUser("NULL", "NULL", "NULL");
     }
 }

@@ -1,5 +1,12 @@
 #include"user.h"
 
+User::User(std::string name, std::string userName, std::string password)
+{
+  m_name = name;
+  m_userName = userName;
+  m_password = password;
+}
+
 //设置账户姓名
 void User::setName(std::string name)
 {

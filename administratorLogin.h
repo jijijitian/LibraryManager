@@ -4,5 +4,5 @@
 struct AdministratorLogin
 {
 public:
-    bool login(AdministratorAccount &administratorAccount);
+    AdministratorUser login(AdministratorAccount &administratorAccount);
 };

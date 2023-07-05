@@ -7,6 +7,8 @@ struct Register
 {
     public:
         int studentRegister(StudentAccount& account);  //学生注册
+        Register();
+
     private:
         RegisterMenu registerMenu;
         StudentUser studentUser;

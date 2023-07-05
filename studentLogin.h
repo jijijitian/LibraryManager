@@ -4,6 +4,6 @@
 struct StudentLogin
 {
     public:
-        bool login(StudentAccount& studentAccount);
+        StudentUser login(StudentAccount& studentAccount);
 
 };

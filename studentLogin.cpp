@@ -1,7 +1,7 @@
 #include"studentLogin.h"
 #include<iostream>
 
-bool StudentLogin::login(StudentAccount& studentAccount)
+StudentUser StudentLogin::login(StudentAccount& studentAccount)
 {
     system("clear");
     std::string userName, password;
@@ -9,12 +9,13 @@ bool StudentLogin::login(StudentAccount& studentAccount)
     std::cin >> userName;
     std::cout << "请输入密码:";
     std::cin >> password;
-    if (studentAccount.findAccount(userName, password))
+    StudentUser studentUser = studentAccount.findAccount(userName, password);
+    if (studentUser.getName() != "NULL")
     {
-        return true;
+        return studentUser;
     }
     else
     {
-        return false;
+        return StudentUser("NULL", "NULL", "NULL");
     }
 }
