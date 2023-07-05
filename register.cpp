@@ -1,7 +1,7 @@
 #include"register.h"
 #include<iostream>
 
-int Register::studentRegister()  //学生注册实现
+int Register::studentRegister(StudentAccount& account)  //学生注册实现
 {
     int choice;
     std::string name, userName, password;
@@ -38,7 +38,7 @@ int Register::studentRegister()  //学生注册实现
             studentUser.setName(name);
             studentUser.setUserName(userName);
             studentUser.setPassword(password);
-            studentUser.storeStudentUser();
+            studentUser.storeStudentUser(studentAccount& account);
             std::cout << "注册成功！" << std::endl;
             break;
         case 2:

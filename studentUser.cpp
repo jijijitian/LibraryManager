@@ -3,7 +3,7 @@
 #include<sstream>
 #include<iostream>
 
-void StudentUser::storeStudentUser()
+void StudentUser::storeStudentUser(StudentAccount& account)
 {
     std::ofstream file("studentUser.csv", std::ios::app);
 
@@ -17,6 +17,7 @@ void StudentUser::storeStudentUser()
     // 写入用户信息到CSV文件
     file << m_name << "," << m_userName << "," << m_password << std::endl;
 
+    account.addAccount(m_userName, m_password);
     // 关闭文件
     file.close();
 }
