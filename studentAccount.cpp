@@ -39,8 +39,8 @@ void StudentAccount::addAccount(std::string userName, std::string password)
 bool StudentAccount::findAccount(std::string userName, std::string password)
 {
     // 检查用户名和密码是否正确
-    //if (studentAccount.find(userName) != studentAccount.end())
-    //{
+    if (studentAccount.find(userName) != studentAccount.end())
+    {
         if (studentAccount[userName] == password)
         {
             return true;
@@ -49,9 +49,22 @@ bool StudentAccount::findAccount(std::string userName, std::string password)
         {
             return false;
         }
-    //}
-    //else
-    //{
-    //    return false;
-    //}
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool StudentAccount::findAccount(std::string userName)
+{
+    // 检查用户名是否存在
+    if (studentAccount.find(userName) != studentAccount.end())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

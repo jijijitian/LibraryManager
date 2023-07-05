@@ -1,18 +1,19 @@
 #include"register.h"
-#include<termios.h>
+#include<unistd.h>
 #include<iostream>
 
 int Register::studentRegister(StudentAccount& account)  //学生注册实现
 {
     int choice;
-    std::string name, userName, password;
-    char passwordConfirm;
-    system("clear");
-    registerMenu.printMenu();
-    std::cin >> choice;
-    switch(choice)
+    do
     {
-        case 1:
+        std::string name, userName, password;
+        char passwordConfirm;
+        system("clear");
+        registerMenu.printMenu();
+        std::cin >> choice;
+        if(choice == 1)
+        {
             system("clear");
             registerMenu.printNameInput();
             std::cin >> name;
@@ -43,15 +44,32 @@ int Register::studentRegister(StudentAccount& account)  //学生注册实现
             studentUser.setName(name);
             studentUser.setUserName(userName);
             studentUser.setPassword(password);
-            studentUser.storeStudentUser(account);
-            std::cout << "注册成功！" << std::endl;
+            while(account.findAccount(userName))  //如果用户名已存在，则提示用户重新输入
+            {
+                system("clear");
+                std::cout << "用户名已存在，请重新输入！" << std::endl;
+                choice = -404;
+                sleep(1);
+                break;
+            }
+            if(!account.findAccount(userName))
+            {
+                studentUser.storeStudentUser(account);
+                std::cout << "注册成功,即将返回主菜单！" << std::endl;
+                sleep(2);
+                break;  
+            }
+        }
+        else if(choice == 2)
+        {
             break;
-        case 2:
-            break;
-        default:
+        }
+        else if(choice != -404)
+        {
             //如果用户输入的不是1或2，则提示用户输入错误
             std::cout << "输入错误，请重新输入！" << std::endl;
-            break;
-    }
+            sleep(1);
+        }
+    } while (true);
     return choice;
 }
