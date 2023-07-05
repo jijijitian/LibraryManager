@@ -2,7 +2,7 @@
 #include"inventory.h"
 #include"studentAccount.h"
 #include"loginMenu.h"
-#include"login.h"
+#include"studentLogin.h"
 #include"registerMenu.h"
 #include"register.h"
 #include"mainWindow.h"
