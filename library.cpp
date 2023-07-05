@@ -1,10 +1,9 @@
 #include"library.h"
-#include<iostream>
 
 void Library::run()
 {
-    int choice;
     StudentAccount *account = new StudentAccount;
+    int choice;
     while(true)
     {
         system("clear");
@@ -13,7 +12,24 @@ void Library::run()
         std::cin >> choice;
         if(choice == 1)  // 学生登录
         {
-            Login login;
+            StudentLogin* studentLogin = new StudentLogin;
+            while(!studentLogin->login(*account))
+            {
+                std::cout << "用户名或密码错误，请重新输入！" << std::endl;
+                sleep(1);
+            }
+        }
+        else if(choice == 2)  // 学生注册
+        {
+            Register* registerUser = new Register;
+            registerUser->studentRegister(*account);
+            delete registerUser;
+            registerUser = nullptr;
+            choice = 0;
+        }
+        /*else if(choice == 3)  // 管理员登录
+        {
+            AdministratorLogin login;
             StudentUser *user = new StudentUser;
             system("clear");
             std::string userName, password;
@@ -46,20 +62,7 @@ void Library::run()
             }
             delete user;
             user = nullptr;
-        }
-        else if(choice == 2)  // 学生注册
-        {
-            Register* registerUser = new Register;
-            registerUser->studentRegister(*account);
-            delete registerUser;
-            registerUser = nullptr;
-            choice = 0;
-        }
-        else if(choice == 3)  // 管理员登录
-        {
-            std::cout << "管理员系统维护中！" << std::endl;
-            exit(0);
-        }
+        }*/
         else if(choice == 4)  // 退出
         {
             std::cout << "感谢使用图书管理系统" << std::endl;

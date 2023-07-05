@@ -1,3 +1,4 @@
+#pragma once
 #include"user.h"
 #include "inventory.h"
 #include"book.h"

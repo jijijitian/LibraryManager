@@ -42,12 +42,12 @@ void Inventory::readInventory()
     file.close();
 }
 
-void Inventory::addBook(Book book)
+void Inventory::addBook(Book &book)
 {
     books.push_back(book);
 }
 
-void Inventory::deleteBook(Book book)
+void Inventory::deleteBook(Book &book)
 {
     for (int i = 0; i < books.size(); i++)
     {
@@ -59,19 +59,7 @@ void Inventory::deleteBook(Book book)
     }
 }
 
-void Inventory::deleteBook(Book book)
-{
-    for (int i = 0; i < books.size(); i++)
-    {
-        if (books[i].getTitle() == book.getTitle())
-        {
-            books.erase(books.begin() + i);
-            break;
-        }
-    }
-}
-
-void Inventory::modifyBook(Book book)
+void Inventory::modifyBook(Book &book)
 {
     for (int i = 0; i < books.size(); i++)
     {
@@ -83,7 +71,7 @@ void Inventory::modifyBook(Book book)
     }
 }
 
-bool Inventory::isExist(Book book)
+bool Inventory::isExist(Book &book)
 {
     for (int i = 0; i < books.size(); i++)
     {
@@ -117,6 +105,7 @@ Book Inventory::findBook(std::string title, std::string findType)
             }
         }
     }
+    return Book("NULL", "NULL", "NULL", "NULL", "NULL", {"NULL", "NULL", "NULL"});
 }
 
 std::vector<Book> Inventory::getBooks()

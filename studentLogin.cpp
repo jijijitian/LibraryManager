@@ -1,11 +1,15 @@
 #include"studentLogin.h"
 #include<iostream>
 
-bool Login::checkAccount(StudentUser& user, StudentAccount& account)
+bool StudentLogin::login(StudentAccount& studentAccount)
 {
-
-    // 检查用户名和密码是否正确
-    if (account.findAccount(user.getName(), user.getPassword()))
+    system("clear");
+    std::string userName, password;
+    std::cout << "请输入用户名:";
+    std::cin >> userName;
+    std::cout << "请输入密码:";
+    std::cin >> password;
+    if (studentAccount.findAccount(userName, password))
     {
         return true;
     }
