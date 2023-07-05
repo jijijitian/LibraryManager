@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-void StudentAccount::readAccount()
+StudentAccount::StudentAccount()
 {
     std::ifstream file("studentUser.csv");
 
@@ -20,9 +20,10 @@ void StudentAccount::readAccount()
     {
         // 将每一行按照逗号分割
         std::stringstream ss(line);
-        std::string userName, password;
+        std::string name, userName, password;
+        getline(ss, name, ',');
         getline(ss, userName, ',');
-        getline(ss, password, ',');
+        getline(ss, password, '\n');
         studentAccount.insert(std::make_pair(userName, password));
     }
 
@@ -38,8 +39,8 @@ void StudentAccount::addAccount(std::string userName, std::string password)
 bool StudentAccount::findAccount(std::string userName, std::string password)
 {
     // 检查用户名和密码是否正确
-    if (studentAccount.find(userName) != studentAccount.end())
-    {
+    //if (studentAccount.find(userName) != studentAccount.end())
+    //{
         if (studentAccount[userName] == password)
         {
             return true;
@@ -48,9 +49,9 @@ bool StudentAccount::findAccount(std::string userName, std::string password)
         {
             return false;
         }
-    }
-    else
-    {
-        return false;
-    }
+    //}
+    //else
+    //{
+    //    return false;
+    //}
 }

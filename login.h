@@ -1,9 +1,10 @@
 #pragma once
 #include"studentAccount.h"
+#include"studentUser.h"
 
 struct Login
 {
     public:
-        bool checkAccount(StudentAccount& account);
+        bool checkAccount(StudentUser& user, StudentAccount& account);
 
 };

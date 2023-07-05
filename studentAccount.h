@@ -5,7 +5,7 @@
 struct StudentAccount
 {
     public:
-        void readAccount(); //读取本地文件
+        StudentAccount(); //默认构造函数读取本地文件
         void addAccount(std::string userName, std::string password);  //添加账户
         bool findAccount(std::string userName, std::string password);  //查找账户
 

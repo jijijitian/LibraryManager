@@ -1,7 +1,7 @@
 #pragma once
 #include"menu.h"
 
-struct loginMenu:public Menu
+struct LoginMenu:public Menu
 {
   public:
     void printMenu();
