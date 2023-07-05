@@ -7,6 +7,8 @@
 #include"registerMenu.h"
 #include"register.h"
 #include"mainWindow.h"
+#include"administratorAccount.h"
+#include"administratorLogin.h"
 #include<unistd.h>
 
 struct Library

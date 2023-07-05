@@ -2,7 +2,8 @@
 
 void Library::run()
 {
-    StudentAccount *account = new StudentAccount;
+    StudentAccount *studentAccount = new StudentAccount;
+    AdministratorAccount *administratorAccount = new AdministratorAccount;
     int choice;
     while(true)
     {
@@ -13,56 +14,37 @@ void Library::run()
         if(choice == 1)  // 学生登录
         {
             StudentLogin* studentLogin = new StudentLogin;
-            while(!studentLogin->login(*account))
+            while(!studentLogin->login(*studentAccount))
             {
                 std::cout << "用户名或密码错误，请重新输入！" << std::endl;
                 sleep(1);
             }
+            MainWindow *mainWindow = new MainWindow;
+            mainWindow->printMenu();
+            delete mainWindow;
+            mainWindow= nullptr;
         }
         else if(choice == 2)  // 学生注册
         {
             Register* registerUser = new Register;
-            registerUser->studentRegister(*account);
+            registerUser->studentRegister(*studentAccount);
             delete registerUser;
             registerUser = nullptr;
             choice = 0;
         }
-        /*else if(choice == 3)  // 管理员登录
+        else if(choice == 3)  // 管理员登录
         {
-            AdministratorLogin login;
-            StudentUser *user = new StudentUser;
-            system("clear");
-            std::string userName, password;
-            std::cout << "请输入用户名:";
-            std::cin >> userName;
-            user->setName(userName);
-            std::cout << "请输入密码:";
-            std::cin >> password;
-            user->setPassword(password);
-            while (!login.checkAccount(*user, *account))
+            AdministratorLogin *administratorLogin = new AdministratorLogin;
+            while (!administratorLogin->login(*administratorAccount))
             {
-                std::cout << "用户名或密码错误，请重新输入！";
-                std::cout << "请输入用户名:";
-                std::cin >> userName;
-                user->setName(userName);
-                std::cout << "请输入密码:";
-                std::cin >> password;
-                user->setPassword(password);
+                std::cout << "用户名或密码错误，请重新输入！" << std::endl;
+                sleep(1);
             }
-            if (login.checkAccount(*user, *account))
-            {
-                std::cout << "登录成功！";
-                MainWindow *mainWindow = new MainWindow;
-                system("clear");
-                mainWindow->printMenu();
-                int secondMenuChoice;
-                std::cin >> secondMenuChoice;
-                delete mainWindow;
-                mainWindow = nullptr;
-            }
-            delete user;
-            user = nullptr;
-        }*/
+            MainWindow *mainWindow = new MainWindow;
+            mainWindow->printMenu();
+            delete mainWindow;
+            mainWindow = nullptr;
+        }
         else if(choice == 4)  // 退出
         {
             std::cout << "感谢使用图书管理系统" << std::endl;
@@ -74,6 +56,10 @@ void Library::run()
             std::cin >> choice;
         }
         delete loginMenu;
+        loginMenu = nullptr;
     }
-    delete account;
+    delete studentAccount;
+    delete administratorAccount;
+    studentAccount = nullptr;
+    administratorAccount = nullptr;
 }
