@@ -21,10 +21,13 @@ AdministratorAccount::AdministratorAccount()
         // 将每一行按照逗号分割
         std::stringstream ss(line);
         std::string userName;
-        std::vector<std::string> password_name;
+        std::string password;
+        std::string name;
+        std::vector<std::string> password_name = {"NULL", "NULL"};
         getline(ss, userName, ',');
-        getline(ss, password_name[0], ',');
-        getline(ss, password_name[1], '\n');
+        getline(ss, password, ',');
+        getline(ss, name, '\n');
+        password_name = {password, name};
         administratorAccount.insert(std::make_pair(userName, password_name));
     }
 

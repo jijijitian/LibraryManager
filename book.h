@@ -18,7 +18,7 @@ struct Book
     std::string getISBN();  //获取ISBN
     std::string getPress();  //获取出版社
     std::string getType();  //获取类型
-    std::vector<std::string> getStatus();  //获取借阅状态
+    std::vector<std::string> getStatus();  //获取借阅状态(借阅状态，借阅人，借阅时间)
   private:
     std::string m_title;  //书名
     std::string m_author;  //作者

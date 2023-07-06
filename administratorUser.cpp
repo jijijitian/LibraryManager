@@ -5,8 +5,20 @@
 #include<string>
 #include<sstream>
 
-void AdministratorUser::addBook(Inventory& inventory, Book& book)
+void AdministratorUser::addBook(Inventory& inventory)
 {
+    std::string title, author, ISBN, press, type;
+    std::cout << "请输入书名：";
+    std::cin >> title;
+    std::cout << "请输入作者：";
+    std::cin >> author;
+    std::cout << "请输入ISBN：";
+    std::cin >> ISBN;
+    std::cout << "请输入出版社：";
+    std::cin >> press;
+    std::cout << "请输入类型：";
+    std::cin >> type;
+    Book book(title, author, ISBN, press, type);
     inventory.addBook(book);
     std::ofstream file("inventory.csv", std::ios::app);
 
@@ -18,14 +30,25 @@ void AdministratorUser::addBook(Inventory& inventory, Book& book)
     }
 
     // 写入图书信息到CSV文件
-    file << book.getTitle() << "," << book.getAuthor() << "," << book.getISBN() << book.getPress() << book.getType() << '\n';
-    inventory.addBook(book);
+    file    << title << "," 
+            << author << "," 
+            << ISBN << ','
+            << press << ','
+            << type << ','
+            << "未借出" << ','
+            << "NULL" << ','
+            << "NULL" << '\n';
     // 关闭文件
     file.close();
+    std::cout << "添加成功！" << std::endl;
 }
 
-void AdministratorUser::deleteBook(Inventory& inventory, Book& bookToDelete)
+void AdministratorUser::deleteBook(Inventory& inventory)
 {
+    std::string ISBN;
+    std::cout << "请输入删除书目的ISBN：";
+    std::cin >> ISBN;
+    Book bookToDelete = inventory.findBook(ISBN,"ISBN");
     if(inventory.getBooks().size() == 0)
     {
         std::cout << "图书目录为空！" << std::endl;
@@ -55,7 +78,7 @@ void AdministratorUser::deleteBook(Inventory& inventory, Book& bookToDelete)
     }
 }
 
-void AdministratorUser::modifyBook(Inventory &inventory, Book &book)
+/*void AdministratorUser::modifyBook(Inventory &inventory, Book &book)
 {
     if(inventory.getBooks().size() == 0)
     {
@@ -84,4 +107,4 @@ void AdministratorUser::modifyBook(Inventory &inventory, Book &book)
         }
         std::cout << "修改成功！" << std::endl;
     }
-}
+}*/

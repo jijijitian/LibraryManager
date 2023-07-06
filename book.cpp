@@ -7,7 +7,7 @@ Book::Book(std::string title, std::string author, std::string ISBN, std::string 
   m_ISBN = ISBN;
   m_press = press;
   m_type = type;
-  m_status[0] = "未借出";
+  m_status = {"未借出", "NULL", "NULL"};
 }
 
 Book::Book(std::string title, std::string author, std::string ISBN, std::string press, std::string type, std::vector<std::string> status)

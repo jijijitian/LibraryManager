@@ -3,7 +3,7 @@
 #include<fstream>
 #include<sstream>
 
-void Inventory::readInventory()
+Inventory::Inventory()
 {
     std::ifstream file("inventory.csv");
 
@@ -24,6 +24,9 @@ void Inventory::readInventory()
         std::string ISBN;
         std::string press;
         std::string type;
+        std::string borrowimgStatus;
+        std::string borrower;
+        std::string borrowDate;
         std::vector<std::string> status;
 
         getline(ss, title, ',');
@@ -31,9 +34,10 @@ void Inventory::readInventory()
         getline(ss, ISBN, ',');
         getline(ss, press, ',');
         getline(ss, type, ',');
-        getline(ss, status[0], ',');  //是否出借
-        getline(ss, status[1], ',');  //借阅人
-        getline(ss, status[2], ',');  //借阅时间
+        getline(ss, borrowimgStatus, ',');  //是否出借
+        getline(ss, borrower, ',');  //借阅人
+        getline(ss, borrowDate, '\n');  //借阅时间
+        status = {borrowimgStatus, borrower, borrowDate};
         Book book(title, author, ISBN, press, type, status);
         books.push_back(book);
     }
@@ -49,11 +53,11 @@ void Inventory::addBook(Book &book)
 
 void Inventory::deleteBook(Book &book)
 {
-    for (int i = 0; i < books.size(); i++)
+    for (int index = 0; index < books.size(); index++)
     {
-        if (books[i].getTitle() == book.getTitle())
+        if (books[index].getISBN() == book.getISBN())
         {
-            books.erase(books.begin() + i);
+            books.erase(books.begin() + index);
             break;
         }
     }
@@ -71,6 +75,31 @@ void Inventory::modifyBook(Book &book)
     }
 }
 
+void Inventory::printBookList()
+{
+    bool flag = 1;
+    for (int i = 0; i < books.size(); i++)
+    {
+        std::cout << "书名：" << books[i].getTitle() << '\t';
+        std::cout << "作者：" << books[i].getAuthor() << '\t';
+        std::cout << "ISBN：" << books[i].getISBN() << '\t';
+        std::cout << "出版社：" << books[i].getPress() << '\t';
+        std::cout << "类型：" << books[i].getType() << '\t';
+        std::cout << "借阅状态：" << books[i].getStatus()[0] << '\t';
+        if(books[i].getStatus()[0] == "已借出")
+        {
+            std::cout << "借阅人：" << books[i].getStatus()[1] << '\t';
+            std::cout << "借阅时间：" << books[i].getStatus()[2] << '\t';
+        }
+        flag = 0;
+        std::cout << std::endl;
+    }
+    if(flag)
+    {
+        std::cout << "当前没有书籍" << std::endl;
+    }
+}
+
 bool Inventory::isExist(Book &book)
 {
     for (int i = 0; i < books.size(); i++)
@@ -83,13 +112,13 @@ bool Inventory::isExist(Book &book)
     return false;
 }
 
-Book Inventory::findBook(std::string title, std::string findType)
+Book Inventory::findBook(std::string strToFind, std::string findType)
 {
     if (findType == "title")
     {
         for (int i = 0; i < books.size(); i++)
         {
-            if (books[i].getTitle() == title)
+            if (books[i].getTitle() == strToFind)
             {
                 return books[i];
             }
@@ -99,7 +128,7 @@ Book Inventory::findBook(std::string title, std::string findType)
     {
         for (int i = 0; i < books.size(); i++)
         {
-            if (books[i].getISBN() == title)
+            if (books[i].getISBN() == strToFind)
             {
                 return books[i];
             }

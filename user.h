@@ -5,6 +5,7 @@
 struct User
 {
   public:
+    User();
     User(std::string name, std::string userName, std::string password);
     void setName(std::string name);
     void setUserName(std::string userName);

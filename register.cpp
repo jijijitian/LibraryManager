@@ -2,6 +2,12 @@
 #include<unistd.h>
 #include<iostream>
 
+Register::Register()
+{
+    registerMenu = RegisterMenu();
+    studentUser = StudentUser();
+}
+
 int Register::studentRegister(StudentAccount& account)  //学生注册实现
 {
     int choice;

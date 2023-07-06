@@ -1,5 +1,12 @@
 #include"user.h"
 
+User::User()
+{
+  m_name = "NULL";
+  m_userName = "NULL";
+  m_password = "NULL";
+}
+
 User::User(std::string name, std::string userName, std::string password)
 {
   m_name = name;

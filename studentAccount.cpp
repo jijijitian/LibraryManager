@@ -21,11 +21,23 @@ StudentAccount::StudentAccount()
         // 将每一行按照逗号分割
         std::stringstream ss(line);
         std::string userName;
+        std::string password;
+        std::string name;
+        std::string reading1;
+        std::string reading2;
+        std::string reading3;
         std::vector<std::string> password_name;
+        std::vector<std::string> reading;
         getline(ss, userName, ',');
-        getline(ss, password_name[0], ',');
-        getline(ss, password_name[1], '\n');
+        getline(ss, password, ',');
+        getline(ss, name, ',');
+        getline(ss, reading1, ',');
+        getline(ss, reading2, ',');
+        getline(ss, reading3, '\n');
+        password_name = {password, name};
+        reading = {reading1, reading2, reading3};
         studentAccount.insert(std::make_pair(userName, password_name));
+        studentReading.insert(std::make_pair(userName, reading));
     }
 
     // 关闭文件
@@ -45,7 +57,7 @@ StudentUser StudentAccount::findAccount(std::string userName, std::string passwo
     {
         if (studentAccount[userName][0] == password)
         {
-            return StudentUser(studentAccount[userName][1], userName, password);
+            return StudentUser(studentAccount[userName][1], userName, password,studentReading[userName]);
         }
         else
         {
@@ -68,5 +80,40 @@ bool StudentAccount::findAccount(std::string userName)
     else
     {
         return false;
+    }
+}
+
+std::vector<StudentUser> StudentAccount::getUsers()
+{
+    std::vector<StudentUser> studentUsers;
+    for (auto it = studentAccount.begin(); it != studentAccount.end(); ++it)
+    {
+        studentUsers.push_back(StudentUser(it->second[1], it->first, it->second[0], studentReading[it->first]));
+    }
+    return studentUsers;
+}
+
+void StudentAccount::setStudentReading(std::string userName, std::string title)
+{
+    for (int index = 0; index < 3; index++)
+    {
+        if(studentReading[userName][index] == "NULL")
+        {
+            studentReading[userName][index] = title;
+            return;
+        }
+    }
+}
+
+void StudentAccount::deleteStudentReading(std::string userName, std::string title)
+{
+    for (int index = 0; index < 3; index++)
+    {
+        if(studentReading[userName][index] == title)
+        {
+            studentReading[userName].erase(studentReading[userName].begin() + index);
+            studentReading[userName].push_back("NULL");
+            return;
+        }
     }
 }
